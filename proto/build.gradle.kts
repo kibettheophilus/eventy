@@ -18,7 +18,7 @@ dependencies {
     compileOnly("io.grpc:grpc-stub:1.20.0")
 //    compileOnly("com.google.protobuf:protobuf-java:3.21.7")
 //    compileOnly("io.grpc:grpc-all:1.49.1")
-//    compileOnly("javax.annotation:javax.annotation-api:1.3.2")
+    compileOnly("javax.annotation:javax.annotation-api:1.3.2")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
