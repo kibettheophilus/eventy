@@ -28,6 +28,8 @@ tasks.test {
 }
 
 protobuf {
+    // protobuf and protoc not available for macOS
+    // https://github.com/grpc/grpc-java/issues/7690
     protoc {
         artifact = if (osdetector.os == "osx") {
             "com.google.protobuf:protoc:3.7.1:osx-x86_64"
