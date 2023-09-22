@@ -28,10 +28,20 @@ tasks.test {
 }
 
 protobuf {
-    protoc { artifact = "com.google.protobuf:protoc:3.7.1:osx-x86_64" }
+    protoc {
+        artifact = if (osdetector.os == "osx") {
+            "com.google.protobuf:protoc:3.7.1:osx-x86_64"
+        } else {
+            "com.google.protobuf:protoc:3.7.1"
+        }
+    }
     plugins {
         id("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.20.0:osx-x86_64"
+            artifact = if (osdetector.os == "osx") {
+                "io.grpc:protoc-gen-grpc-java:1.20.0:osx-x86_64"
+            } else {
+                "io.grpc:protoc-gen-grpc-java:1.20.0"
+            }
         }
     }
     generateProtoTasks {
