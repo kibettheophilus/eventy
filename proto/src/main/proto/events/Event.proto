@@ -13,8 +13,16 @@ message Event {
   repeated Registration registrations = 6;
 }
 
+message GetEvent{
+  string id = 1;
+}
 message Registration {
   string id = 1;
   Event event = 2;
   //  User user=3;
+}
+
+service EventsService{
+  rpc createEvent(Event) returns (Event){}
+  rpc getEvents(GetEvent) returns(Event){}
 }
