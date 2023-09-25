@@ -9,6 +9,8 @@ import net.devh.boot.grpc.server.service.GrpcService;
 @GrpcService
 public class PaymentServiceImpl extends PaymentServiceGrpc.PaymentServiceImplBase {
     private PaymentService paymentService;
+
+    // TODO: 25/09/2023 since this should be running as a scheduled task rather than an invoked by user, maybe remove from proto
     @Override
     public void getMpesaToken(Payments.MpesaAuthTokenRequest request, StreamObserver<Payments.MpesaAuthTokenResponse> responseObserver) {
 

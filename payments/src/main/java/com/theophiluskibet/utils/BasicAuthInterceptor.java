@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+// TODO: 25/09/2023 Research better way to do this 
 public class BasicAuthInterceptor implements Interceptor {
     private final String credentials;
 
