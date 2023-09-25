@@ -11,6 +11,7 @@ message Event {
   string location = 4;
   int32 capacity = 5;
   repeated Registration registrations = 6;
+  EventType type = 7;
 }
 
 enum EventType{
@@ -28,13 +29,12 @@ message Registration {
   //  User user=3;
 }
 
-message EventsReponse {
+message EventsResponse {
   repeated Event events = 1;
 }
 
 service EventsService{
   rpc createEvent(Event) returns (Event){}
-  rpc deleteEvent(EventId) returns (){}
   rpc updateEvent(Event) returns (Event){}
-  rpc getEvents(EventId) returns(EventsReponse){}
+  rpc getEvents(EventId) returns(EventsResponse){}
 }
