@@ -13,7 +13,7 @@ public class EventServiceImpl extends EventsServiceGrpc.EventsServiceImplBase {
     }
 
     @Override
-    public void getEvents(EventOuterClass.GetEvent request, StreamObserver<EventOuterClass.Event> responseObserver) {
+    public void getEvents(EventOuterClass.GetEvent request, StreamObserver<EventOuterClass.EventsReponse> responseObserver) {
         super.getEvents(request, responseObserver);
     }
 }
