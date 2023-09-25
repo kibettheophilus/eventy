@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package com.theophiluskibet.users;
+
+message User {
+  string id = 1;
+  string username = 2;
+  string password = 3;
+  string email = 4;
+  Roles role = 5;
+}
+
+enum Roles {
+  ADMIN = 0;
+}
+
+service UserService {
+  rpc createUser(User) returns(User){}
+  rpc updateUser(User) returns(User){}
+}

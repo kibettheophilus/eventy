@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package com.theophiluskibet.event;
+
+import "google/protobuf/timestamp.proto";
+
+message Event {
+  string id = 1;
+  string title = 2;
+  google.protobuf.Timestamp date = 3;
+  string location = 4;
+  int32 capacity = 5;
+  repeated Registration registrations = 6;
+}
+
+message GetEvent{
+  string id = 1;
+}
+
+message Registration {
+  string id = 1;
+  Event event = 2;
+  //  User user=3;
+}
+
+message EventsReponse {
+  repeated Event events = 1;
+}
+service EventsService{
+  rpc createEvent(Event) returns (Event){}
+  rpc getEvents(GetEvent) returns(EventsReponse){}
+}
