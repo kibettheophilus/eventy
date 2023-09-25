@@ -3,7 +3,7 @@ package com.theophiluskibet.dtos;
 import lombok.Data;
 
 /**
- * Add @Data annotation generates getters and setters
+ * Adding @Data annotation generates getters and setters
  */
 @Data
 public class AccessToken {
