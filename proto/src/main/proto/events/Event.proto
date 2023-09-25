@@ -13,7 +13,12 @@ message Event {
   repeated Registration registrations = 6;
 }
 
-message GetEvent{
+enum EventType{
+  Free = 0;
+  Paid = 1;
+}
+
+message EventId{
   string id = 1;
 }
 
@@ -26,7 +31,10 @@ message Registration {
 message EventsReponse {
   repeated Event events = 1;
 }
+
 service EventsService{
   rpc createEvent(Event) returns (Event){}
-  rpc getEvents(GetEvent) returns(EventsReponse){}
+  rpc deleteEvent(EventId) returns (){}
+  rpc updateEvent(Event) returns (Event){}
+  rpc getEvents(EventId) returns(EventsReponse){}
 }

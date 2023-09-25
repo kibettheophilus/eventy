@@ -10,6 +10,7 @@ public class EventServiceImpl extends EventsServiceGrpc.EventsServiceImplBase {
     @Override
     public void createEvent(EventOuterClass.Event request, StreamObserver<EventOuterClass.Event> responseObserver) {
         super.createEvent(request, responseObserver);
+
     }
 
     @Override
