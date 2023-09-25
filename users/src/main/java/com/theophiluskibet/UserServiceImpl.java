@@ -1,21 +1,20 @@
 package com.theophiluskibet;
 
+import com.theophiluskibet.users.UserOuterClass;
+import com.theophiluskibet.users.UserServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
-import users.UserServiceGrpc;
-import users.Users;
 
 @GrpcService
 public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     @Override
-    public void createUser(Users.UserRequest request, StreamObserver<Users.UserResponse> responseObserver) {
-        Users.UserRequest user = Users.UserRequest.newBuilder().setId(request.getId()).setName(request.getName()).build();
+    public void createUser(UserOuterClass.User request, StreamObserver<UserOuterClass.User> responseObserver) {
+        super.createUser(request, responseObserver);
+    }
 
-        Users.UserResponse response = Users.UserResponse.newBuilder().setId(user.getId()).setName(user.getName()).build();
-
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
-
+    @Override
+    public void updateUser(UserOuterClass.User request, StreamObserver<UserOuterClass.User> responseObserver) {
+        super.updateUser(request, responseObserver);
     }
 }
 
