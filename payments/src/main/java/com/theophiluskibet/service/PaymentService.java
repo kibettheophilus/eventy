@@ -9,8 +9,4 @@ import org.springframework.stereotype.Service;
 public class PaymentService {
     private PaymentRepository paymentRepository;
 
-    public void get(AccessToken token){
-        token.
-    }
-
 }
