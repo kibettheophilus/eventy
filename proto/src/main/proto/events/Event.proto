@@ -25,8 +25,8 @@ message EventId{
 
 message Registration {
   string id = 1;
-  Event event = 2;
-  //  User user=3;
+  string username = 2;
+  google.protobuf.Timestamp created_at = 3;
 }
 
 message EventsResponse {
@@ -36,5 +36,5 @@ message EventsResponse {
 service EventsService{
   rpc createEvent(Event) returns (Event){}
   rpc updateEvent(Event) returns (Event){}
-  rpc getEvents(EventId) returns(EventsResponse){}
+  rpc getEvents(EventId) returns(EventsResponse);
 }
