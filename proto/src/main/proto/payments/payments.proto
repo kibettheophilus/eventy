@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package com.theophiluskibet.payments;
+
+// TODO: Remove Access Token related messages
+message MpesaAuthTokenRequest {
+  string consumerKey = 1;
+  string consumerSecret = 2;
+}
+
+message MpesaAuthTokenResponse {
+  string accessToken = 1;
+  string expiresIn = 2;
+}
+
+message MpesaStkPushRequest{
+  string businessShortCode = 1;
+  string password = 2;
+  string timeStamp = 3;
+  string transactionType = 4;
+  string amount = 5;
+  string partyA = 6;
+  string partyB = 7;
+  string phoneNumber = 8;
+  string callBackURL = 9;
+  string accountReference = 10;
+  string transactionDesc = 11;
+}
+
+message MpesaStkPushResponse{
+  string merchantRequestID = 1;
+  string checkoutRequestID = 2;
+  string responseCode = 3;
+  string responseDescription = 4;
+  string customerMessage = 5;
+}
+
+service PaymentService{
+  rpc getMpesaToken(MpesaAuthTokenRequest) returns(MpesaAuthTokenResponse){}
+  rpc initiateMpesaStkPush(MpesaStkPushRequest) returns(MpesaStkPushResponse){}
+}
