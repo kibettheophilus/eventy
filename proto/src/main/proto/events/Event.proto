@@ -37,4 +37,5 @@ service EventsService{
   rpc createEvent(Event) returns (Event){}
   rpc updateEvent(Event) returns (Event){}
   rpc getEvents(EventId) returns(EventsResponse);
+  rpc deleteEvent(EventId) returns (Event){};
 }
