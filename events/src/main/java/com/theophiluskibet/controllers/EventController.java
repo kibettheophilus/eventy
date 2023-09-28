@@ -3,9 +3,7 @@ package com.theophiluskibet.controllers;
 import com.theophiluskibet.dtos.EventDto;
 import com.theophiluskibet.repository.EventsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,14 +13,24 @@ public class EventController {
     @Autowired
     EventsRepository eventsRepository;
 
-    @GetMapping("/event")
-    public EventDto getEvent(@RequestParam("id") String eventId) {
-        return eventsRepository.getEventDtoById(eventId);
+    @PostMapping("event")
+    public EventDto createEvent(@RequestBody EventDto incomingEvent){
+        return eventsRepository.save(incomingEvent);
+    }
+
+    @GetMapping("/event/{id}")
+    public EventDto getEvent(@PathVariable("id") String eventId) {
+        return eventsRepository.findById(eventId).orElseThrow();
     }
 
     @GetMapping("/events")
     public List<EventDto> getEvents() {
         return eventsRepository.findAll();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteEvent(@PathVariable String id){
+        eventsRepository.deleteById(id);
     }
 }
 
