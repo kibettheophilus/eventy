@@ -6,7 +6,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Data
 @Document("event")
 public class EventDto {
     @Id
@@ -19,6 +18,17 @@ public class EventDto {
 
     public RegistrationDto[] registrations;
     public String eventType;
+
+    public EventDto(String id,String title,Date date, String location, int capacity, RegistrationDto[] registrations, String eventType){
+        super();
+        this.id = id;
+        this.title = title;
+        this.date = date;
+        this.location = location;
+        this.capacity = capacity;
+        this.registrations = registrations;
+        this.eventType = eventType;
+    }
 
 }
 

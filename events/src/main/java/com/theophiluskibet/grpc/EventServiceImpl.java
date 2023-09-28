@@ -22,7 +22,7 @@ public class EventServiceImpl extends EventsServiceGrpc.EventsServiceImplBase {
 
     @Override
     public void createEvent(EventOuterClass.Event request, StreamObserver<EventOuterClass.Event> responseObserver) {
-        eventsRepository.save(new EventDto());
+//        eventsRepository.save();
     }
 
     @Override
