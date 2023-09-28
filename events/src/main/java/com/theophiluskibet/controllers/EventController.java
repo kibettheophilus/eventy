@@ -10,11 +10,10 @@ import java.util.List;
 @RestController
 public class EventController {
 
-    @Autowired
     EventsRepository eventsRepository;
 
     @PostMapping("event")
-    public EventDto createEvent(@RequestBody EventDto incomingEvent){
+    public EventDto createEvent(@RequestBody EventDto incomingEvent) {
         return eventsRepository.save(incomingEvent);
     }
 
@@ -29,8 +28,13 @@ public class EventController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteEvent(@PathVariable String id){
+    public void deleteEvent(@PathVariable String id) {
         eventsRepository.deleteById(id);
+    }
+
+    public EventController(@Autowired EventsRepository eventsRepository) {
+        super();
+        this.eventsRepository = eventsRepository;
     }
 }
 
