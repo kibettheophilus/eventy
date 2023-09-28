@@ -8,18 +8,4 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EventsRepository extends MongoRepository<EventDto, String> {
-
-    EventDto save(@NonNull EventDto eventDto);
-
-    EventDto getEventDtoById(String id);
-
-    boolean existsById(@NonNull String id);
-
-    @NonNull
-    List<EventDto> findAll();
-
-    void deleteEventDtoById(String id);
-
-}
-
+public interface EventsRepository extends MongoRepository<EventDto, String> {}
