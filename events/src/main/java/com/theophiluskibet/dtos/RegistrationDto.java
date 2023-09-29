@@ -1,11 +1,9 @@
 package com.theophiluskibet.dtos;
 
 import com.google.type.DateTime;
-import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
 @Document("registration")
 public class RegistrationDto {
 
@@ -14,6 +12,13 @@ public class RegistrationDto {
 
     public String username;
 
-    public DateTime createdAt;
+    public String createdAt;
+
+    public RegistrationDto(String id, String username, String createdAt) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.createdAt = createdAt;
+    }
 
 }
