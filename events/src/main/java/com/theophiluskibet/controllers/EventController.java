@@ -2,7 +2,11 @@ package com.theophiluskibet.controllers;
 
 import com.theophiluskibet.dtos.EventDto;
 import com.theophiluskibet.repository.EventsRepository;
+import com.theophiluskibet.service.EventsService;
+import com.theophiluskibet.utils.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,36 +14,82 @@ import java.util.List;
 @RestController
 public class EventController {
 
-    EventsRepository eventsRepository;
+    EventsService eventsService;
 
     @PostMapping("event")
-    public EventDto createEvent(@RequestBody EventDto incomingEvent) {
-        return eventsRepository.save(incomingEvent);
+    public ResponseEntity<Object> createEvent(@RequestBody EventDto incomingEvent) {
+        try {
+            EventDto result = eventsService.createEvent(incomingEvent);
+            return ResponseHandler.respond(
+                    "Event created successfully",
+                    HttpStatus.CREATED,
+                    result
+            );
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.CONFLICT, null);
+        }
     }
 
     @GetMapping("/event/{id}")
-    public EventDto getEvent(@PathVariable("id") String eventId) {
-        return eventsRepository.findById(eventId).orElseThrow();
+    public ResponseEntity<Object> getEvent(@PathVariable("id") String eventId) {
+        try {
+            EventDto result = eventsService.getEvent(eventId);
+            return ResponseHandler.respond(
+                    "Event fetch successful",
+                    HttpStatus.FOUND,
+                    result
+            );
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.CONFLICT, null);
+        }
     }
 
     @GetMapping("/events")
-    public List<EventDto> getEvents() {
-        return eventsRepository.findAll();
+    public ResponseEntity<Object> getEvents() {
+        try {
+            List<EventDto> result = eventsService.getEvents();
+            return ResponseHandler.respond(
+                    "Events fetch successful",
+                    HttpStatus.OK,
+                    result
+            );
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.CONFLICT, null);
+        }
     }
 
     @PutMapping("/event")
-    public EventDto updateEvent(@RequestBody EventDto eventDto){
-        return eventsRepository.save(eventDto);
+    public ResponseEntity<Object> updateEvent(@RequestBody EventDto eventDto) {
+        try {
+            EventDto result = eventsService.updateEvent(eventDto);
+            return ResponseHandler.respond(
+                    "Event updated successfully",
+                    HttpStatus.OK,
+                    result
+            );
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.CONFLICT, null);
+        }
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteEvent(@PathVariable String id) {
-        eventsRepository.deleteById(id);
+    public ResponseEntity<Object> deleteEvent(@PathVariable String id) {
+        try {
+            eventsService.deleteEvent(id);
+            ;
+            return ResponseHandler.respond(
+                    "Event deleted successfully",
+                    HttpStatus.OK,
+                    null
+            );
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.NOT_FOUND, null);
+        }
     }
 
-    public EventController(@Autowired EventsRepository eventsRepository) {
+    public EventController(@Autowired EventsService eventsService) {
         super();
-        this.eventsRepository = eventsRepository;
+        this.eventsService = eventsService;
     }
 }
 
