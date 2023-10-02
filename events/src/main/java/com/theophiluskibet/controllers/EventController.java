@@ -27,6 +27,11 @@ public class EventController {
         return eventsRepository.findAll();
     }
 
+    @PutMapping("/event")
+    public EventDto updateEvent(@RequestBody EventDto eventDto){
+        return eventsRepository.save(eventDto);
+    }
+
     @DeleteMapping("/delete/{id}")
     public void deleteEvent(@PathVariable String id) {
         eventsRepository.deleteById(id);
