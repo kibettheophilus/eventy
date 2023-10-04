@@ -31,6 +31,10 @@ public class EventsService {
         eventsRepository.deleteById(id);
     }
 
+    public boolean registerForEvent(){
+        
+    }
+
     public EventsService(EventsRepository eventsRepository){
         super();
         this.eventsRepository = eventsRepository;
