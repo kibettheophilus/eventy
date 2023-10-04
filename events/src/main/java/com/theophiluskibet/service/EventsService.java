@@ -2,10 +2,7 @@ package com.theophiluskibet.service;
 
 import com.theophiluskibet.dtos.EventDto;
 import com.theophiluskibet.dtos.RegistrationDto;
-import com.theophiluskibet.event.EventOuterClass;
 import com.theophiluskibet.repository.EventsRepository;
-import com.theophiluskibet.repository.RegistrationsRepository;
-import jdk.jshell.EvalException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +11,6 @@ import java.util.List;
 public class EventsService {
 
     EventsRepository eventsRepository;
-    RegistrationsRepository registrationsRepository;
 
     public EventDto createEvent(EventDto incomingEvent) {
         return eventsRepository.save(incomingEvent);
@@ -38,9 +34,9 @@ public class EventsService {
 
     public boolean registerForEvent(String eventId, String attendeeName) {
         try {
-            registrationsRepository.insert(new RegistrationDto(attendeeName, "", eventId));
             EventDto event = eventsRepository.findById(eventId).orElseThrow();
-            EventDto eventToSave = new EventDto(event.id, event.title, event.date, event.location, event.capacity, event.registrations, event.eventType);
+            RegistrationDto[] registrations = addRegistration(event.registrations, new RegistrationDto(attendeeName, "", eventId));
+            EventDto eventToSave = new EventDto(event.id, event.title, event.date, event.location, event.capacity, registrations, event.eventType);
             eventsRepository.save(eventToSave);
             return true;
         } catch (Exception e) {
@@ -48,9 +44,21 @@ public class EventsService {
         }
     }
 
-    public EventsService(EventsRepository eventsRepository, RegistrationsRepository registrationsRepository) {
+    public EventsService(EventsRepository eventsRepository) {
         super();
         this.eventsRepository = eventsRepository;
-        this.registrationsRepository = registrationsRepository;
+    }
+
+    private RegistrationDto[] addRegistration(RegistrationDto[] registrations, RegistrationDto userRegistration) {
+
+        int index;
+        RegistrationDto[] newRegistrations = new RegistrationDto[registrations.length + 1];
+
+        for (index = 0; index < registrations.length; index++) {
+            newRegistrations[index] = registrations[index];
+        }
+        newRegistrations[registrations.length + 1] = userRegistration;
+
+        return newRegistrations;
     }
 }
