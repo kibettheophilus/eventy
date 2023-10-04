@@ -17,6 +17,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("net.devh:grpc-server-spring-boot-starter:2.14.0.RELEASE")
     implementation("net.devh:grpc-client-spring-boot-starter:2.14.0.RELEASE")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
     implementation(project(":proto"))
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
