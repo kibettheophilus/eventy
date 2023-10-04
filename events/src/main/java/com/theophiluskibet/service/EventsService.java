@@ -5,6 +5,8 @@ import com.theophiluskibet.dtos.RegistrationDto;
 import com.theophiluskibet.repository.EventsRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -51,14 +53,12 @@ public class EventsService {
 
     private RegistrationDto[] addRegistration(RegistrationDto[] registrations, RegistrationDto userRegistration) {
 
-        int index;
-        RegistrationDto[] newRegistrations = new RegistrationDto[registrations.length + 1];
+        List<RegistrationDto> registrationsList = new ArrayList<RegistrationDto>(Arrays.asList(registrations));
 
-        for (index = 0; index < registrations.length; index++) {
-            newRegistrations[index] = registrations[index];
-        }
-        newRegistrations[registrations.length + 1] = userRegistration;
+        registrationsList.add(userRegistration);
 
-        return newRegistrations;
+        registrations = registrationsList.toArray(registrations);
+
+        return registrations;
     }
 }

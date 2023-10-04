@@ -74,17 +74,17 @@ public class EventController {
     }
 
     @PutMapping("event/register")
-    public ResponseEntity<Object> registerForEvent(@RequestBody RegistrationDto registration){
+    public ResponseEntity<Object> registerForEvent(@RequestBody RegistrationDto registration) {
         try {
             boolean isRegistrationSuccess = eventsService.registerForEvent(registration);
-            if(isRegistrationSuccess){
+            if (isRegistrationSuccess) {
                 return ResponseHandler.respond(
-                        "Event updated successfully",
+                        "You are going to this event!!",
                         HttpStatus.OK,
                         true
                 );
-            }else {
-                return ResponseHandler.respond("Failed to register for event", HttpStatus.CONFLICT, null);
+            } else {
+                return ResponseHandler.respond("Failed to register for event", HttpStatus.NOT_IMPLEMENTED, null);
             }
 
         } catch (Exception exception) {
