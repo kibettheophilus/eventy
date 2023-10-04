@@ -2,11 +2,9 @@ package com.theophiluskibet.service;
 
 import com.theophiluskibet.dtos.AccessToken;
 import com.theophiluskibet.dtos.InitiateStkPush;
-import com.theophiluskibet.dtos.InitiateStkPushRes;
 import com.theophiluskibet.dtos.StkPushRequest;
 import com.theophiluskibet.repositories.PaymentRepository;
 import com.theophiluskibet.utils.ExternalApiCalls;
-import com.theophiluskibet.utils.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,8 +56,6 @@ public class PaymentService {
 
             externalApiCalls.initiateStkPush(stkPushRequest);
         }
-
-
     }
 
 }
