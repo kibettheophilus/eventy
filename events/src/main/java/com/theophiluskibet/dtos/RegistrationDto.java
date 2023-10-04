@@ -14,11 +14,13 @@ public class RegistrationDto {
 
     public String createdAt;
 
-    public RegistrationDto(String id, String username, String createdAt) {
+    public String eventId;
+
+    public RegistrationDto(String username, String createdAt, String eventId) {
         super();
-        this.id = id;
         this.username = username;
         this.createdAt = createdAt;
+        this.eventId = eventId;
     }
 
 }
