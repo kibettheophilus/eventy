@@ -32,10 +32,10 @@ public class EventsService {
         eventsRepository.deleteById(id);
     }
 
-    public boolean registerForEvent(String eventId, String attendeeName) {
+    public boolean registerForEvent(RegistrationDto registration) {
         try {
-            EventDto event = eventsRepository.findById(eventId).orElseThrow();
-            RegistrationDto[] registrations = addRegistration(event.registrations, new RegistrationDto(attendeeName, "", eventId));
+            EventDto event = eventsRepository.findById(registration.eventId).orElseThrow();
+            RegistrationDto[] registrations = addRegistration(event.registrations, registration);
             EventDto eventToSave = new EventDto(event.id, event.title, event.date, event.location, event.capacity, registrations, event.eventType);
             eventsRepository.save(eventToSave);
             return true;
