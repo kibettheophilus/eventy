@@ -2,9 +2,8 @@ package com.theophiluskibet.controllers;
 
 import com.theophiluskibet.dtos.EventDto;
 import com.theophiluskibet.dtos.RegistrationDto;
-import com.theophiluskibet.repository.EventsRepository;
 import com.theophiluskibet.service.EventsService;
-import com.theophiluskibet.utils.ResponseHandler;
+import com.theophiluskibet.utilities.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

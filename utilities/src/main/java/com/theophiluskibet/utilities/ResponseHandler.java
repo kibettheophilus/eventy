@@ -1,4 +1,4 @@
-package com.theophiluskibet.utils;
+package com.theophiluskibet.utilities;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
