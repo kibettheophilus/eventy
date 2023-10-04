@@ -6,4 +6,5 @@ import lombok.Data;
 public class InitiateStkPush {
     private String amount;
     private String phoneNumber;
+    private String eventId;
 }
