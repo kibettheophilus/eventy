@@ -16,7 +16,4 @@ public class AccessToken {
 
     @JsonProperty("expires_in")
     private String expiresIn;
-
-    // hardcoded this because we only need one token
-    private String id = "1";
 }

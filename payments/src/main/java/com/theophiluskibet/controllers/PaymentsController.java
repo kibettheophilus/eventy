@@ -15,11 +15,6 @@ public class PaymentsController {
     @Autowired
     private PaymentService paymentService;
 
-    @GetMapping
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok(paymentService.home());
-    }
-
     @PostMapping("stkPush")
     public void initiateStkPush(@RequestBody InitiateStkPush initiateStkPush) {
         paymentService.initiateStkPush(initiateStkPush);

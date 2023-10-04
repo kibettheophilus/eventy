@@ -21,14 +21,6 @@ public class PaymentService {
     @Autowired
     ExternalApiCalls externalApiCalls;
 
-    public String home() {
-        return "Home";
-    }
-
-    public void saveAccessToken(AccessToken accessToken) {
-        paymentRepository.save(accessToken);
-    }
-
     public void initiateStkPush(InitiateStkPush initiateStkPush) {
         // TimeStamp
         LocalDateTime timeStamp = LocalDateTime.now();

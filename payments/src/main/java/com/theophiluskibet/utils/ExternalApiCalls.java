@@ -18,16 +18,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 
-// TODO: 25/09/2023 cleanup and save token to db
 @Component
 public class ExternalApiCalls {
-
-//    @Autowired
-//    private PaymentService paymentService;
-
     private String authHeader;
 
-    // TODO: 25/09/2023 change time to 1hr = 1000*60*60
     @Scheduled(fixedRate = 60 * 60 * 1000)
     private void getAccessToken() throws IOException {
         Request request = new Request.Builder()
@@ -49,7 +43,6 @@ public class ExternalApiCalls {
                 try (ResponseBody responseBody = response.body()) {
                     ObjectMapper mapper = new ObjectMapper();
                     AccessToken accessToken = mapper.readValue(responseBody.string(), AccessToken.class);
-                    // paymentService.saveAccessToken(accessToken);
                     authHeader = accessToken.getAccessToken();
                     System.out.println(accessToken);
                 }
