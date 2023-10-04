@@ -1,6 +1,7 @@
 package com.theophiluskibet.controllers;
 
 import com.theophiluskibet.dtos.EventDto;
+import com.theophiluskibet.dtos.RegistrationDto;
 import com.theophiluskibet.repository.EventsRepository;
 import com.theophiluskibet.service.EventsService;
 import com.theophiluskibet.utils.ResponseHandler;
@@ -67,6 +68,25 @@ public class EventController {
                     HttpStatus.OK,
                     result
             );
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.CONFLICT, null);
+        }
+    }
+
+    @PutMapping("event/register")
+    public ResponseEntity<Object> registerForEvent(@RequestBody RegistrationDto registration) {
+        try {
+            boolean isRegistrationSuccess = eventsService.registerForEvent(registration);
+            if (isRegistrationSuccess) {
+                return ResponseHandler.respond(
+                        "You are going to this event!!",
+                        HttpStatus.OK,
+                        true
+                );
+            } else {
+                return ResponseHandler.respond("Failed to register for event", HttpStatus.NOT_IMPLEMENTED, null);
+            }
+
         } catch (Exception exception) {
             return ResponseHandler.respond(exception.getMessage(), HttpStatus.CONFLICT, null);
         }
