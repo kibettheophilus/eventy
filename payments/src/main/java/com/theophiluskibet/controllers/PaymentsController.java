@@ -5,20 +5,23 @@ import com.theophiluskibet.service.PaymentService;
 import com.theophiluskibet.utils.ResponseHandler;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/")
 public class PaymentsController {
 
-    String password = new Base64().decode("").toString();
     @Autowired
     private PaymentService paymentService;
 
+    @GetMapping
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok(paymentService.home());
+    }
+
     @PostMapping("stkPush")
-    public void initiateStkPush(InitiateStkPush initiateStkPush) {
+    public void initiateStkPush(@RequestBody InitiateStkPush initiateStkPush) {
         paymentService.initiateStkPush(initiateStkPush);
     }
 
