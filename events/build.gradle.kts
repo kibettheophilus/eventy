@@ -16,8 +16,6 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("net.devh:grpc-server-spring-boot-starter:2.14.0.RELEASE")
-    implementation("net.devh:grpc-client-spring-boot-starter:2.14.0.RELEASE")
-    implementation(project(":proto"))
     implementation(project(":utilities"))
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
