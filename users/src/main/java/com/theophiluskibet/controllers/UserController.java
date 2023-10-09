@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
-    private final UserRepository userRepository;
     public UserService userService;
 
     @PostMapping("/user")
     public ResponseEntity<Object> createUser(@RequestBody UserDto userDto) {
-        try{
+        try {
             UserDto result = userService.createUser(userDto);
             return ResponseHandler.respond("", HttpStatus.CONFLICT, result);
         } catch (Exception exception) {
@@ -25,13 +24,17 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public UserDto getUserById(@PathVariable("id") String eventId){
-
+    public ResponseEntity<Object> getUserById(@PathVariable("id") String userId) {
+        try {
+            UserDto user = userService.getUser(userId);
+            return ResponseHandler.respond("", HttpStatus.CONFLICT, user);
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.CONFLICT, null);
+        }
     }
 
-    public UserController(UserRepository userRepository, UserService userService) {
+    public UserController(UserService userService) {
         super();
-        this.userRepository = userRepository;
         this.userService = userService;
     }
 
