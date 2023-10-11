@@ -18,7 +18,6 @@ public class UserService {
     public UserDto getUser(String id){
         return userRepository.findById(id).orElseThrow();
     }
-
     public List<UserDto> getUsers(){
         return userRepository.findAll();
     }
