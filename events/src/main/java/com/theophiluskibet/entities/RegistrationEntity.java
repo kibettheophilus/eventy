@@ -1,11 +1,12 @@
-package com.theophiluskibet.dtos;
+package com.theophiluskibet.entities;
 
-import com.google.type.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-public class RegistrationDto {
 
+public class RegistrationEntity {
+
+    @Id
     public String id;
 
     public String username;
@@ -14,10 +15,11 @@ public class RegistrationDto {
 
     public String eventId;
 
-    public RegistrationDto(String username, String createdAt, String eventId) {
+    public RegistrationEntity(String username, String createdAt, String eventId) {
         super();
         this.username = username;
         this.createdAt = createdAt;
         this.eventId = eventId;
     }
+
 }

@@ -47,7 +47,7 @@ public class EventController {
     @GetMapping("/events")
     public ResponseEntity<Object> getEvents() {
         try {
-            List<EventDto> result = eventsService.getEvents();
+            List<EventDto> result = List.of(eventsService.getEvents());
             return ResponseHandler.respond(
                     "Events fetch successful",
                     HttpStatus.OK,
