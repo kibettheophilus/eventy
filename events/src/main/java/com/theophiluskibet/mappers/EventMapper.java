@@ -12,9 +12,8 @@ public interface EventMapper {
 
     EventDto eventDtoFromEventEntity(EventEntity eventEntity);
 
-    EventEntity[] eventsToEntities(EventDto[] events);
+    EventEntity[] eventEntitiesFromEventDtos(EventDto[] events);
 
-    EventDto[] eventsToDtos(EventEntity[] events);
     EventDto[] eventDtosFromEventEntities(EventEntity[] events);
 
     EventEntity eventEntityFromEventDto(EventDto eventDto);

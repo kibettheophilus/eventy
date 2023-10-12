@@ -4,8 +4,8 @@ import com.theophiluskibet.dtos.RegistrationDto;
 import com.theophiluskibet.entities.RegistrationEntity;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface RegistrationEntityMapper {
 
-    RegistrationDto registrationEntityToRegistrationDto(RegistrationEntity registrationEntity);
+    RegistrationDto registrationDtoFromEntity(RegistrationEntity registrationEntity);
 }
