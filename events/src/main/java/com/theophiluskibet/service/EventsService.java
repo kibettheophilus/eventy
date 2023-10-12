@@ -2,6 +2,8 @@ package com.theophiluskibet.service;
 
 import com.theophiluskibet.dtos.EventDto;
 import com.theophiluskibet.dtos.RegistrationDto;
+import com.theophiluskibet.entities.EventEntity;
+import com.theophiluskibet.mappers.EventMapper;
 import com.theophiluskibet.repository.EventsRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,21 +15,27 @@ import java.util.List;
 public class EventsService {
 
     EventsRepository eventsRepository;
+    EventMapper eventMapper;
 
     public EventDto createEvent(EventDto incomingEvent) {
-        return eventsRepository.save(incomingEvent);
+        EventEntity eventEntity = eventsRepository.save(eventMapper.eventEntityFromEventDto(incomingEvent));
+        return eventMapper.eventDtoFromEventEntity(eventEntity);
     }
 
     public EventDto getEvent(String eventId) {
-        return eventsRepository.findById(eventId).orElseThrow();
+        return eventMapper.eventDtoFromEventEntity(eventsRepository.findById(eventId).orElseThrow());
     }
 
-    public List<EventDto> getEvents() {
-        return eventsRepository.findAll();
+    public EventDto[] getEvents() {
+        var eventsFromDb = eventsRepository.findAll();
+        EventEntity[] eventEntities = new EventEntity[eventsFromDb.size()];
+        eventEntities = eventsFromDb.toArray(eventEntities);
+        return eventMapper.eventDtosFromEventEntities(eventEntities);
     }
 
     public EventDto updateEvent(EventDto eventDto) {
-        return eventsRepository.save(eventDto);
+        var savedEvent = eventsRepository.save(eventMapper.eventEntityFromEventDto(eventDto));
+        return eventMapper.eventDtoFromEventEntity(savedEvent);
     }
 
     public void deleteEvent(String id) {
@@ -36,24 +44,25 @@ public class EventsService {
 
     public boolean registerForEvent(RegistrationDto registration) {
         try {
-            EventDto event = eventsRepository.findById(registration.eventId).orElseThrow();
+            EventDto event = getEvent(registration.eventId);
             RegistrationDto[] registrations = addRegistration(event.registrations, registration);
             EventDto eventToSave = new EventDto(event.id, event.title, event.date, event.location, event.capacity, registrations, event.eventType);
-            eventsRepository.save(eventToSave);
+            updateEvent(eventToSave);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-    public EventsService(EventsRepository eventsRepository) {
+    public EventsService(EventsRepository eventsRepository, EventMapper eventMapper) {
         super();
         this.eventsRepository = eventsRepository;
+        this.eventMapper = eventMapper;
     }
 
     private RegistrationDto[] addRegistration(RegistrationDto[] registrations, RegistrationDto userRegistration) {
 
-        List<RegistrationDto> registrationsList = new ArrayList<RegistrationDto>(Arrays.asList(registrations));
+        List<RegistrationDto> registrationsList = new ArrayList<>(Arrays.asList(registrations));
 
         registrationsList.add(userRegistration);
 

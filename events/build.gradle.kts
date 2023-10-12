@@ -4,6 +4,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.3"
     id("mongo-base")
     id("base-lombok")
+    id("base-map-struct")
 }
 
 group = "com.theophiluskibet"
