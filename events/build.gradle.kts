@@ -15,10 +15,6 @@ repositories {
 }
 
 dependencies {
-    // mapstruct
-    implementation("org.mapstruct:mapstruct:1.5.3.Final")
-    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.3.Final")
-
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("net.devh:grpc-server-spring-boot-starter:2.14.0.RELEASE")
     implementation("net.devh:grpc-client-spring-boot-starter:2.14.0.RELEASE")

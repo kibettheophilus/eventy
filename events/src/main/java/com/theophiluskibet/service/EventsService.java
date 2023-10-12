@@ -18,23 +18,24 @@ public class EventsService {
     EventMapper eventMapper;
 
     public EventDto createEvent(EventDto incomingEvent) {
-        EventEntity eventEntity = eventsRepository.save(eventMapper.eventDtoToEntity(incomingEvent));
-        return eventMapper.eventEntityToEventDto(eventEntity);
+        EventEntity eventEntity = eventsRepository.save(eventMapper.eventEntityFromEventDto(incomingEvent));
+        return eventMapper.eventDtoFromEventEntity(eventEntity);
     }
 
     public EventDto getEvent(String eventId) {
-        return eventMapper.eventEntityToEventDto(eventsRepository.findById(eventId).orElseThrow());
+        return eventMapper.eventDtoFromEventEntity(eventsRepository.findById(eventId).orElseThrow());
     }
 
     public EventDto[] getEvents() {
         var eventsFromDb = eventsRepository.findAll();
-        EventEntity[] eventDtos = new EventEntity[eventsFromDb.size()];
-        return eventMapper.eventsToDtos(eventDtos);
+        EventEntity[] eventEntities = new EventEntity[eventsFromDb.size()];
+        eventEntities = eventsFromDb.toArray(eventEntities);
+        return eventMapper.eventDtosFromEventEntities(eventEntities);
     }
 
     public EventDto updateEvent(EventDto eventDto) {
-        var savedEvent = eventsRepository.save(eventMapper.eventDtoToEntity(eventDto));
-        return eventMapper.eventEntityToEventDto(savedEvent);
+        var savedEvent = eventsRepository.save(eventMapper.eventEntityFromEventDto(eventDto));
+        return eventMapper.eventDtoFromEventEntity(savedEvent);
     }
 
     public void deleteEvent(String id) {

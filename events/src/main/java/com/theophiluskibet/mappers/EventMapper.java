@@ -10,12 +10,13 @@ public interface EventMapper {
 
     EventMapper INSTANCE = Mappers.getMapper(EventMapper.class);
 
-    EventDto eventEntityToEventDto(EventEntity eventEntity);
+    EventDto eventDtoFromEventEntity(EventEntity eventEntity);
 
     EventEntity[] eventsToEntities(EventDto[] events);
 
     EventDto[] eventsToDtos(EventEntity[] events);
+    EventDto[] eventDtosFromEventEntities(EventEntity[] events);
 
-    EventEntity eventDtoToEntity(EventDto eventDto);
+    EventEntity eventEntityFromEventDto(EventDto eventDto);
 
 }
