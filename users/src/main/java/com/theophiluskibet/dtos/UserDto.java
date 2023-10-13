@@ -1,23 +1,13 @@
 package com.theophiluskibet.dtos;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+@Data
 public class UserDto {
-
-    @Id
-    String id;
-    String userName;
-    String password;
-    String email;
-
-    String role;
-
-    public UserDto(String userName, String password, String email, String role){
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.role = role;
-    }
+    public String userName;
+    public String password;
+    public String email;
+    public String role;
 }

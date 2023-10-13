@@ -1,36 +1,63 @@
 package com.theophiluskibet.service;
 
 import com.theophiluskibet.dtos.UserDto;
+import com.theophiluskibet.entities.UserEntity;
+import com.theophiluskibet.mappers.UserMapper;
 import com.theophiluskibet.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserDto createUser(UserDto user){
-        return userRepository.insert(user);
+    public UserService(UserRepository userRepository, UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
-    public UserDto getUser(String id){
-        return userRepository.findById(id).orElseThrow();
+    public UserEntity createUser(UserDto user) {
+        if (user.userName.isEmpty()) {
+            throw new IllegalArgumentException("Username cannot be empty");
+        } else {
+            return userRepository.insert(userMapper.userEntityFromUserDto(user));
+        }
     }
-    public List<UserDto> getUsers(){
+
+    public UserEntity getUser(String id) {
+        Optional<UserEntity> userEntity = userRepository.findById(id);
+        if (userEntity.isEmpty()) {
+            throw new IllegalArgumentException("User with id " + id + " not found");
+        } else {
+            return userEntity.get();
+        }
+    }
+
+    public List<UserEntity> getUsers() {
         return userRepository.findAll();
     }
 
-    public UserDto update(UserDto user){
-        return userRepository.save(user);
+    public UserEntity update(UserDto user, String userId) {
+        Optional<UserEntity> userEntity = userRepository.findById(userId);
+        if (userEntity.isEmpty()) {
+            throw new IllegalArgumentException("User with id " + userId + " not found");
+        } else {
+            return userRepository.save(userMapper.userEntityFromUserDto(user));
+        }
     }
 
-    public void deleteUser(String id){
-        userRepository.deleteById(id);
-    }
-
-    public UserService(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public void deleteUser(String id) {
+        Optional<UserEntity> userEntity = userRepository.findById(id);
+        if (userEntity.isEmpty()) {
+            throw new IllegalArgumentException("User with id " + id + " not found");
+        } else {
+            userRepository.deleteById(id);
+        }
     }
 }

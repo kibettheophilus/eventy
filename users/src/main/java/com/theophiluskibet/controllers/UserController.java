@@ -1,41 +1,79 @@
 package com.theophiluskibet.controllers;
 
 import com.theophiluskibet.dtos.UserDto;
+import com.theophiluskibet.entities.UserEntity;
 import com.theophiluskibet.repository.UserRepository;
 import com.theophiluskibet.service.UserService;
 import com.theophiluskibet.utilities.ResponseHandler;
+import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
+@RequestMapping("users")
 public class UserController {
 
-    public UserService userService;
+    public final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/user")
     public ResponseEntity<Object> createUser(@RequestBody UserDto userDto) {
         try {
-            UserDto result = userService.createUser(userDto);
-            return ResponseHandler.respond("", HttpStatus.CONFLICT, result);
+            UserEntity result = userService.createUser(userDto);
+            return ResponseHandler.respond("User created successfully", HttpStatus.CREATED, result);
         } catch (Exception exception) {
-            return ResponseHandler.respond(exception.getMessage(), HttpStatus.CONFLICT, null);
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.BAD_REQUEST, null);
         }
     }
 
     @GetMapping("/user/{id}")
     public ResponseEntity<Object> getUserById(@PathVariable("id") String userId) {
         try {
-            UserDto user = userService.getUser(userId);
-            return ResponseHandler.respond("", HttpStatus.CONFLICT, user);
+            UserEntity user = userService.getUser(userId);
+            return ResponseHandler.respond("User fetched successfully", HttpStatus.OK, user);
         } catch (Exception exception) {
-            return ResponseHandler.respond(exception.getMessage(), HttpStatus.CONFLICT, null);
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.BAD_REQUEST, null);
         }
     }
 
-    public UserController(UserService userService) {
-        super();
-        this.userService = userService;
+    @PatchMapping("/user/{id}")
+    public ResponseEntity<Object> updateUserById(
+            @PathVariable("id") String userId,
+            @RequestBody UserDto userDto
+    ) {
+        try {
+            UserEntity user = userService.update(userDto, userId);
+            return ResponseHandler.respond("User updated successfully", HttpStatus.OK, user);
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
     }
 
+    @GetMapping
+    public ResponseEntity<Object> getUsers() {
+        try {
+            List<UserEntity> users = userService.getUsers();
+            return ResponseHandler.respond("Users fetched successfully", HttpStatus.OK, users);
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
+    }
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable("id") String userId) {
+        try {
+            userService.deleteUser(userId);
+            return ResponseHandler.respond("User deleted successfully", HttpStatus.OK, null);
+        } catch (Exception exception) {
+            return ResponseHandler.respond(exception.getMessage(), HttpStatus.BAD_REQUEST, null);
+        }
+    }
 }
