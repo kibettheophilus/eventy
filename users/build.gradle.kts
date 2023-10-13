@@ -3,6 +3,7 @@ plugins {
     id("org.springframework.boot") version "3.1.3"
     id("io.spring.dependency-management") version "1.1.3"
     id("mongo-base")
+    id("base-map-struct")
 }
 
 group = "com.theophiluskibet"
@@ -19,6 +20,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
     implementation(project(":proto"))
     implementation(project(":utilities"))
+    implementation("org.projectlombok:lombok:1.18.28")
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
