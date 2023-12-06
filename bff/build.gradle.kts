@@ -11,6 +11,12 @@ repositories {
     mavenCentral()
 }
 
+dependencyManagement{
+    imports{
+        mavenBom("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:8.0.0")
+    }
+}
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:8.0.0"))
