@@ -1,12 +1,9 @@
 package com.theophiluskibet.controllers;
 
-import com.theophiluskibet.dtos.UserDto;
-import com.theophiluskibet.entities.UserEntity;
-import com.theophiluskibet.repository.UserRepository;
+import com.theophiluskibet.models.entities.dtos.UserDto;
+import com.theophiluskibet.models.entities.UserEntity;
 import com.theophiluskibet.service.UserService;
 import com.theophiluskibet.utilities.ResponseHandler;
-import org.springframework.data.mongodb.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +34,7 @@ public class UserController {
     @GetMapping("/user/{id}")
     public ResponseEntity<Object> getUserById(@PathVariable("id") String userId) {
         try {
-            UserEntity user = userService.getUser(userId);
+            Optional<UserEntity> user = userService.getUser(userId);
             return ResponseHandler.respond("User fetched successfully", HttpStatus.OK, user);
         } catch (Exception exception) {
             return ResponseHandler.respond(exception.getMessage(), HttpStatus.BAD_REQUEST, null);
@@ -61,6 +58,7 @@ public class UserController {
     public ResponseEntity<Object> getUsers() {
         try {
             List<UserEntity> users = userService.getUsers();
+            System.out.println(users);
             return ResponseHandler.respond("Users fetched successfully", HttpStatus.OK, users);
         } catch (Exception exception) {
             return ResponseHandler.respond(exception.getMessage(), HttpStatus.BAD_REQUEST, null);

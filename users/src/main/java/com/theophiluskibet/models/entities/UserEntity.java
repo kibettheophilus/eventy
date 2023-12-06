@@ -1,4 +1,4 @@
-package com.theophiluskibet.entities;
+package com.theophiluskibet.models.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

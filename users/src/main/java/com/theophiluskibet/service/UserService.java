@@ -1,13 +1,11 @@
 package com.theophiluskibet.service;
 
-import com.theophiluskibet.dtos.UserDto;
-import com.theophiluskibet.entities.UserEntity;
-import com.theophiluskibet.mappers.UserMapper;
+import com.theophiluskibet.models.entities.dtos.UserDto;
+import com.theophiluskibet.models.entities.UserEntity;
+import com.theophiluskibet.models.entities.mappers.UserMapper;
 import com.theophiluskibet.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,12 +28,12 @@ public class UserService {
         }
     }
 
-    public UserEntity getUser(String id) {
+    public Optional<UserEntity> getUser(String id) {
         Optional<UserEntity> userEntity = userRepository.findById(id);
         if (userEntity.isEmpty()) {
             throw new IllegalArgumentException("User with id " + id + " not found");
         } else {
-            return userEntity.get();
+            return userEntity;
         }
     }
 
