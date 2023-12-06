@@ -1,7 +1,7 @@
-package com.theophiluskibet.mappers;
+package com.theophiluskibet.models.entities.mappers;
 
-import com.theophiluskibet.dtos.UserDto;
-import com.theophiluskibet.entities.UserEntity;
+import com.theophiluskibet.models.entities.dtos.UserDto;
+import com.theophiluskibet.models.entities.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

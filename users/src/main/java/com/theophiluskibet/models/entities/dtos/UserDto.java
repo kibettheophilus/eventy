@@ -1,4 +1,4 @@
-package com.theophiluskibet.dtos;
+package com.theophiluskibet.models.entities.dtos;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

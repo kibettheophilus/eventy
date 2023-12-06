@@ -34,6 +34,7 @@ public class EventController {
     public ResponseEntity<Object> getEvent(@PathVariable("id") String eventId) {
         try {
             EventDto result = eventsService.getEvent(eventId);
+            System.out.println("Events:" + result);
             return ResponseHandler.respond(
                     "Event fetch successful",
                     HttpStatus.FOUND,
