@@ -21,9 +21,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation(platform("com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:8.0.0"))
     implementation("com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter")
-//    implementation("net.devh:grpc-server-spring-boot-starter:2.14.0.RELEASE")
-//    implementation("net.devh:grpc-client-spring-boot-starter:2.14.0.RELEASE")
-//    implementation(project(":proto"))
+    implementation("net.devh:grpc-client-spring-boot-starter:2.14.0.RELEASE")
+    implementation(project(":proto"))
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
