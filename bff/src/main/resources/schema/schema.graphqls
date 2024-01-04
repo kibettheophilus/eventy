@@ -1,7 +1,24 @@
 type Query{
-    greetings(language: String): [Greeting]
+    getEvents(input: EventInput): EventResponse
 }
 
-type Greeting {
-    greeting: String
+input EventInput{
+    eventName: String
 }
+
+type EventResponse{
+    success: Boolean,
+    data: [EventDetails]
+}
+
+type EventDetails{
+    id: String,
+    title: String
+}
+#string id = 1;
+#string title = 2;
+#google.protobuf.Timestamp date = 3;
+#string location = 4;
+#int32 capacity = 5;
+#repeated Registration registrations = 6;
+#EventType type = 7;
