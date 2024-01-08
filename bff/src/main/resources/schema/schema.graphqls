@@ -1,0 +1,7 @@
+type Query{
+    greetings(language: String): [Greeting]
+}
+
+type Greeting {
+    greeting: String
+}
