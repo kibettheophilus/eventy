@@ -2,6 +2,8 @@ plugins {
     `java-library`
     id("org.springframework.boot") version "3.1.3"
     id("io.spring.dependency-management") version "1.1.3"
+    id("com.netflix.dgs.codegen") version "6.1.0"
+    id("base-lombok")
 }
 
 group = "com.theophiluskibet"
@@ -30,4 +32,9 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.generateJava {
+    packageName = "com.theophiluskibet.graphql" // The package name to use to generate sources
+    generateClient = true // Enable generating the type safe query API
 }
