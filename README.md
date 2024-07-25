@@ -1,4 +1,4 @@
-# WIP
+# WIP 👷
 
 # Tech Stack
 - gRPC
